@@ -3,6 +3,8 @@ require_once(__DIR__ . '/lib/_autoload.php');
 $as = new \SimpleSAML\Auth\Simple('test-sp');
 if (isset($_GET['login'])) {
   $as->requireAuth(['ReturnTo' => '/']);
+} else if (isset($_GET['logout'])) {
+  $as->logout(['ReturnTo' => '/']);
 }
 ?>
 <html>
@@ -19,6 +21,8 @@ if (isset($_GET['login'])) {
 if ($as->isAuthenticated()) { ?>
   <h2>Below are the attributes you are logged in with</h2>
   <pre><?= print_r($as->getAttributes()); ?></pre>
+  <h2>Logout below</h2>
+  <a href="/?logout">Click here to logout</a>
 <?php
 } else {
 ?>
