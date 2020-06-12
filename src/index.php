@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/lib/_autoload.php');
 $as = new \SimpleSAML\Auth\Simple('test-sp');
 if (isset($_GET['login'])) {
-  $as->requireAuth();
+  $as->requireAuth(['ReturnTo' => '/']);
 }
 ?>
 <html>
