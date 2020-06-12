@@ -3,6 +3,14 @@ require_once(__DIR__ . '/lib/_autoload.php');
 $as = new \SimpleSAML\Auth\Simple('test-sp');
 if (isset($_GET['login'])) {
   $as->requireAuth(['ReturnTo' => '/']);
+} else if (isset($_GET['logout'])) {
+  foreach ($_COOKIE as $key => $value) {
+    if (in_array($key, ['SimpleSAMLAuthTokenIdp', 'PHPSESSIDIDP'])) {
+      setcookie($key, '', 0, '/');
+      header('Location: https://www.exdev.test/saml/logout/', false, 302);
+      exit();
+    }
+  }
 }
 ?>
 <html>
@@ -20,7 +28,7 @@ if ($as->isAuthenticated()) { ?>
   <h2>Below are the attributes you are logged in with</h2>
   <pre><?= print_r($as->getAttributes()); ?></pre>
   <h2>Logout below</h2>
-  <a href="https://www.exdev.test/saml/logout">Click here to logout</a>
+  <a href="/?logout">Click here to logout</a>
 <?php
 } else {
 ?>
