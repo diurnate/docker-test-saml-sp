@@ -19,6 +19,7 @@ COPY config/simplesamlphp/saml20-sp-remote.php /var/www/simplesamlphp/metadata
 COPY config/simplesamlphp/saml20-idp-remote.php /var/www/simplesamlphp/metadata
 COPY config/simplesamlphp/server.crt /var/www/simplesamlphp/cert/
 COPY config/simplesamlphp/server.pem /var/www/simplesamlphp/cert/
+COPY src/index.php /var/www/simplesamlphp/
 RUN touch /var/www/simplesamlphp/modules/exampleauth/enable
 
 # Apache
