@@ -7,10 +7,10 @@ if (isset($_GET['login'])) {
   foreach ($_COOKIE as $key => $value) {
     if (in_array($key, ['SimpleSAMLAuthTokenIdp', 'PHPSESSIDIDP'])) {
       setcookie($key, '', 0, '/');
-      header('Location: https://www.exdev.test/saml/logout/', false, 302);
-      exit();
     }
   }
+  header('Location: https://www.exdev.test/saml/logout/', false, 302);
+  exit();
 }
 ?>
 <html>
